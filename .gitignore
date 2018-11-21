@@ -2,10 +2,9 @@
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.*.local
-/.env
 /public/bundles/
 /var/
-/vendor/
+/vendor/93695ce78508595cc865d83dc4a6f65820cd4344
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
@@ -17,6 +16,5 @@
 /.web-server-pid
 ###< symfony/web-server-bundle ###
 /.idea
-*~
 /.env
 
