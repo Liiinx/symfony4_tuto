@@ -5,35 +5,15 @@
 {% block body %}
 <section class="articles">
 
-    <article>
-        <h2>titre de l'article</h2>
-        <div class="metadata">écrit le 19/11/2018 à 20h dans la catégorie balnave</div>
-        <div class="content"><img src="http://placehold.it/350x150" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem beatae dolores est illum labore
-                officia.</p>
-            <p>Eaque earum exercitationem incidunt maxime officiis omnis, voluptatum! Eius eligendi facere laudantium
-                rerum temporibus veniam?</p>
-            <a href="{{ path('blog_show') }}" class="btn btn-primary">lire la suite</a></div>
-    </article>
-    <article>
-        <h2>titre de l'article</h2>
-        <div class="metadata">écrit le 19/11/2018 à 20h dans la catégorie balnave</div>
-        <div class="content"><img src="http://placehold.it/350x150" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam porro quod sapiente sed
-                sunt.</p>
-            <p>Aliquid dolor dolore illum laudantium sed. Aut error fugit nam odio odit officia quidem recusandae!</p>
-            <a href="{{ path('blog_show') }}" class="btn btn-primary">lire la suite</a></div>
-    </article>
-    <article>
-        <h2>titre de l'article</h2>
-        <div class="metadata">écrit le 19/11/2018 à 20h dans la catégorie balnave</div>
-        <div class="content"><img src="http://placehold.it/350x150" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta iure non perspiciatis quidem totam!
-                Provident.</p>
-            <p>Doloremque ducimus fuga iste quae soluta. Alias dignissimos dolore eaque iusto perferendis quidem
-                similique voluptates.</p>
-            <a href="{{ path('blog_show') }}" class="btn btn-primary">lire la suite</a></div>
-    </article>
+    {% for article in articles %}
+        <article>
+            <h2>{{ article.title }}</h2>
+            <div class="metadata">écrit le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }} dans la catégorie balnave</div>
+            <div class="content"><img src="{{ article.image }}" alt="">
+                {{ article.content | raw }}
+                <a href="{{ path('blog_show', {'id': article.id}) }}" class="btn btn-primary">lire la suite</a></div>
+        </article>
+    {% endfor %}
 
 </section>
 {% endblock %}

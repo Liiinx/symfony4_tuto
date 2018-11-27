@@ -34,11 +34,27 @@ class Article
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createAt;
+    private $createdAt;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 
     public function getTitle(): ?string
@@ -77,15 +93,5 @@ class Article
         return $this;
     }
 
-    public function getCreateAt(): ?\DateTimeInterface
-    {
-        return $this->createAt;
-    }
 
-    public function setCreateAt(\DateTimeInterface $createAt): self
-    {
-        $this->createAt = $createAt;
-
-        return $this;
-    }
 }
