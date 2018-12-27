@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -90,9 +92,27 @@ class BlogController extends AbstractController
      * @param Article $article
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function show(Article $article)
+    public function show(Article $article, Request $request, ObjectManager $manager)
     {
-        return $this->render('blog/show.html.twig', ['article' => $article]);
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $comment->setCreatedAt(new \DateTime())
+                    ->setArticle($article);
+            $manager->persist($comment);
+            $manager->flush();
+
+            return $this->redirectToRoute('blog_show', ['id' =>$article->getId()]);
+        }
+
+        return $this->render('blog/show.html.twig', [
+            'article' => $article,
+            'commentForm' => $form->createView(),
+        ]);
     }
 
 

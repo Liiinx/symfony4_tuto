@@ -45,10 +45,19 @@ class SecurityController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/connexion", name="security_login")
      */
-
     public function login()
     {
 
         return $this->render('security/login.html.twig');
     }
+
+    /**
+     * @Route("/deconnexion", name="security_logout")
+     */
+    public function logout()
+    {
+
+
+    }
+
 }
